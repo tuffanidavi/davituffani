@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Davi Luccas Tuffani · Sete anos de vida. Uma eternidade de amor.</title>
+<meta name="description" content="A história de Davi Luccas Tuffani, o menino que ensinou a todos que o amor de uma criança deixa marcas que nem o tempo apaga.">
+<meta property="og:title" content="Davi Luccas Tuffani">
+<meta property="og:description" content="Sete anos de vida. Uma eternidade de amor.">
+<meta property="og:image" content="fotos/davi-01.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💚</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F6F8; --surface:#FFFFFF; --ink:#16263D; --muted:#51627A;
+  --blue:#1F4FD8; --green:#2FA35F; --line:#D9E2EA;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Nunito Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0E1726; --surface:#16233A; --ink:#EAF0F7; --muted:#A5B4C9; --blue:#7FA2FF; --green:#5FD08C; --line:#26354F;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.6}
+img,video{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+/* Hero */
+.hero{position:relative;min-height:92vh;min-height:92svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#101c30}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,20,38,.88) 0%,rgba(10,20,38,.45) 38%,rgba(10,20,38,0) 65%)}
+.hero-text{position:relative;z-index:1;width:100%;max-width:1040px;margin:0 auto;padding:0 24px 56px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.4rem,8vw,5.2rem);line-height:1.02;margin:0 0 14px;letter-spacing:-.02em}
+.hero p{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,3vw,1.6rem);margin:0;max-width:30ch;opacity:.95}
+@media (prefers-reduced-motion:no-preference){
+  .hero-text{animation:rise 1.2s ease-out both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+
+/* Tabs */
+.tabbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:4px;max-width:1040px;margin:0 auto;padding:0 16px;overflow-x:auto}
+.tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;padding:16px 18px 13px;font:700 1rem var(--sans);color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--green)}
+
+main{max-width:1040px;margin:0 auto;padding:48px 24px 72px}
+[role="tabpanel"][hidden]{display:none}
+
+/* Story */
+.story{max-width:62ch;margin:0 auto;font-family:var(--serif);font-size:clamp(1.12rem,2.2vw,1.28rem);line-height:1.8}
+.story p{margin:0 0 1.15em}
+.story .lead{font-size:1.18em;line-height:1.55}
+.story .break{margin:2.2em 0 1.2em;padding-left:20px;border-left:4px solid var(--green)}
+.story .break p{margin:0 0 .5em}
+.story .pause{font-style:italic;color:var(--muted)}
+.story .final{margin-top:2.4em;padding-top:1.6em;border-top:1px solid var(--line);text-align:center}
+.story .final .big{font-size:clamp(1.5rem,4vw,2.1rem);font-weight:600;line-height:1.25;margin-bottom:1em;letter-spacing:-.01em}
+
+/* Gallery */
+.panel-title{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 24px;letter-spacing:-.01em}
+.gallery{columns:3 260px;column-gap:14px}
+.gallery button{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:var(--surface);border-radius:10px;overflow:hidden;cursor:zoom-in;break-inside:avoid}
+.gallery img{width:100%;height:auto;transition:transform .35s}
+.gallery button:hover img{transform:scale(1.03)}
+@media (prefers-reduced-motion:reduce){.gallery img{transition:none}}
+
+/* Videos */
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
+.videos figure{margin:0;background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.videos video{width:100%;max-height:70vh;background:#000}
+
+/* Lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100vw;height:100vh}
+dialog::backdrop{background:rgba(6,12,24,.92)}
+.lb{display:grid;place-items:center;width:100%;height:100%;padding:56px 56px}
+.lb img{max-height:88vh;max-width:100%;object-fit:contain;border-radius:6px}
+.lb-btn{position:fixed;background:rgba(255,255,255,.14);color:#fff;border:0;width:46px;height:46px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:rgba(255,255,255,.28)}
+.lb-close{top:14px;right:14px}.lb-prev{left:10px;top:50%;transform:translateY(-50%)}.lb-next{right:10px;top:50%;transform:translateY(-50%)}
+@media (max-width:600px){.lb{padding:56px 8px}}
+
+footer{text-align:center;padding:36px 24px 56px;color:var(--muted);font-family:var(--serif);font-style:italic;border-top:1px solid var(--line)}
+footer strong{display:block;font-style:normal;color:var(--ink);font-size:1.15rem;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="fotos/davi-01.jpg" alt="Davi sorrindo, apoiado em uma grade azul">
+  <div class="hero-text">
+    <h1>Davi Luccas Tuffani</h1>
+    <p>Sete anos de vida. Uma eternidade de amor.</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="tabs" role="tablist" aria-label="Seções do site">
+    <button class="tab" role="tab" id="tab-historia" aria-controls="historia" aria-selected="true">A história</button>
+    <button class="tab" role="tab" id="tab-fotos" aria-controls="fotos" aria-selected="false" tabindex="-1">Fotos</button>
+    <button class="tab" role="tab" id="tab-videos" aria-controls="videos" aria-selected="false" tabindex="-1">Vídeos</button>
+  </div>
+</div>
+
+<main>
+  <section id="historia" role="tabpanel" aria-labelledby="tab-historia">
+    <article class="story">
+      <p class="lead">Era uma vez um menino que chegou ao mundo trazendo consigo algo que não se pode comprar, ensinar ou explicar: um coração cheio de amor.</p>
+      <p>Ele tinha apenas sete anos, mas parecia conhecer o segredo de viver. Gostava de brincar, sorrir, descobrir o mundo e aproveitar cada momento. Era uma criança saudável, cheia de vida, carinho e alegria.</p>
+      <p>Seu jeito especial conquistava todos ao redor. Era amado pela família, querido pelos amigos e por todos que tinham a oportunidade de conhecê-lo.</p>
+      <p>Ele tinha um coração imenso. Daqueles que não precisam de grandes palavras para demonstrar amor. Um abraço, um carinho, um sorriso ou um gesto de bondade eram suficientes para fazer alguém se sentir especial.</p>
+      <p>Durante seus sete anos, deixou lembranças que jamais poderão ser apagadas. Cada brincadeira, cada conversa, cada abraço e cada momento vivido se transformaram em pequenos tesouros guardados no coração de quem o amava.</p>
+
+      <p class="pause">Mas a vida reservava uma batalha que ninguém poderia imaginar.</p>
+      <p>Uma doença muito rara, a síndrome de Pfeiffer, entrou em sua história. Uma luta difícil, inesperada e dolorosa, que mudou o caminho daquela família.</p>
+      <p>E, mesmo diante de tudo o que aconteceu, existe algo que a doença nunca conseguiu tirar: a beleza da sua história, o amor que ele recebeu e, principalmente, o amor que deixou.</p>
+      <p>Ele partiu aos sete anos, cedo demais para quem tinha tanto para viver.</p>
+      <p>Mas existem crianças que passam muitos anos neste mundo sem deixar marcas tão profundas quanto algumas deixam em tão pouco tempo.</p>
+      <p><strong>Ele foi uma dessas crianças.</strong></p>
+      <p>Hoje, sua ausência é sentida nos pequenos detalhes, nos lugares onde brincava, nas lembranças que surgem inesperadamente e no silêncio que ficou.</p>
+
+      <div class="break">
+        <p>Mas sua história não termina na despedida.</p>
+        <p>Ela continua em cada pessoa que o amou, em cada lembrança compartilhada e em cada gesto de carinho que nasceu da sua passagem por este mundo.</p>
+      </div>
+
+      <p>Porque ele não será lembrado apenas pela doença que enfrentou ou pela maneira como partiu.</p>
+      <p><strong>Será lembrado pelo menino que foi.</strong></p>
+
+      <div class="final">
+        <p class="big">Sete anos de vida.<br>Uma eternidade de amor.</p>
+        <p>E, para sempre, o menino que ensinou a todos que o amor de uma criança pode deixar marcas que nem o tempo é capaz de apagar.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="fotos" role="tabpanel" aria-labelledby="tab-fotos" hidden>
+    <h2 class="panel-title">Fotos</h2>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section id="videos" role="tabpanel" aria-labelledby="tab-videos" hidden>
+    <h2 class="panel-title">Vídeos</h2>
+    <div class="videos">
+      <figure><video controls preload="none" playsinline poster="videos/poster-3.jpg"><source src="videos/video-3.mp4" type="video/mp4"></video></figure>
+      <figure><video controls preload="none" playsinline poster="videos/poster-2.jpg"><source src="videos/video-2.mp4" type="video/mp4"></video></figure>
+      <figure><video controls preload="none" playsinline poster="videos/poster-1.jpg"><source src="videos/video-1.mp4" type="video/mp4"></video></figure>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>Davi Luccas Tuffani</strong>
+  Para sempre no coração de quem o amou.
+</footer>
+
+<dialog id="lightbox" aria-label="Foto ampliada">
+  <div class="lb"><img id="lb-img" alt=""></div>
+  <button class="lb-btn lb-close" id="lb-close" aria-label="Fechar">×</button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="Foto anterior">‹</button>
+  <button class="lb-btn lb-next" id="lb-next" aria-label="Próxima foto">›</button>
+</dialog>
+
+<script>
+// Para adicionar mais fotos: coloque o arquivo na pasta "fotos" e acrescente o nome aqui.
+const FOTOS = ["davi-01.jpg","davi-02.jpg","davi-03.jpg","davi-04.jpg","davi-05.jpg","davi-06.jpg","davi-07.jpg","davi-08.jpg"];
+
+const tabs = [...document.querySelectorAll('.tab')];
+function show(id, focus){
+  tabs.forEach(t=>{
+    const on = t.getAttribute('aria-controls')===id;
+    t.setAttribute('aria-selected',on); t.tabIndex = on?0:-1;
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    if(on && focus) t.focus();
+  });
+  if(!['historia','fotos','videos'].includes(id)) return;
+  history.replaceState(null,'','#'+id);
+  document.querySelectorAll('video').forEach(v=>v.pause());
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener('click',()=>{show(t.getAttribute('aria-controls'));
+    document.querySelector('.tabbar').scrollIntoView({behavior:'smooth'});});
+  t.addEventListener('keydown',e=>{
+    let j = e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+    if(j===null) return; e.preventDefault();
+    show(tabs[(j+tabs.length)%tabs.length].getAttribute('aria-controls'),true);
+  });
+});
+const start = location.hash.slice(1);
+if(['fotos','videos'].includes(start)) show(start);
+
+// Gallery + lightbox
+const g = document.getElementById('gallery'), lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img');
+let cur = 0;
+FOTOS.forEach((f,i)=>{
+  const b = document.createElement('button');
+  b.setAttribute('aria-label','Ampliar foto '+(i+1));
+  b.innerHTML = '<img loading="lazy" src="fotos/'+f+'" alt="Foto '+(i+1)+' de Davi">';
+  b.onclick = ()=>open(i);
+  g.appendChild(b);
+});
+function open(i){cur=(i+FOTOS.length)%FOTOS.length; lbImg.src='fotos/'+FOTOS[cur]; lbImg.alt='Foto '+(cur+1)+' de Davi'; if(!lb.open) lb.showModal();}
+document.getElementById('lb-close').onclick=()=>lb.close();
+document.getElementById('lb-prev').onclick=()=>open(cur-1);
+document.getElementById('lb-next').onclick=()=>open(cur+1);
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb')) lb.close();});
+lb.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')open(cur-1); if(e.key==='ArrowRight')open(cur+1);});
+</script>
+</body>
+</html>

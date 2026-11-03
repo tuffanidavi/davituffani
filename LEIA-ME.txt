@@ -1,0 +1,16 @@
+COMO COLOCAR O SITE NO AR (GitHub Pages)
+
+1. Crie a conta em https://github.com/signup (gratuito).
+2. Clique em "+" (canto superior direito) > "New repository".
+   - Repository name: davi  (o endereço ficará seunome.github.io/davi)
+   - Marque "Public" e clique em "Create repository".
+3. Na página do repositório, clique em "uploading an existing file".
+4. Arraste para lá o arquivo index.html e as pastas "fotos" e "videos"
+   (arraste o CONTEÚDO da pasta do site, não a pasta zip).
+   Aguarde terminar o envio e clique em "Commit changes".
+5. Vá em Settings > Pages. Em "Branch", escolha "main" e "/ (root)" e clique em Save.
+6. Em 1 a 3 minutos o endereço aparece no topo da página de Pages.
+
+PARA ADICIONAR MAIS FOTOS:
+- Envie o arquivo para a pasta "fotos" do repositório (Add file > Upload files).
+- Abra index.html, clique no lápis (editar) e acrescente o nome do arquivo na lista FOTOS, perto do final.
