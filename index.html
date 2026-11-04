@@ -80,6 +80,18 @@ main{max-width:1040px;margin:0 auto;padding:48px 24px 72px}
 .videos figure{margin:0;background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
 .videos video{width:100%;max-height:70vh;background:#000}
 
+/* Homenagens */
+.tribute-intro{max-width:62ch;font-family:var(--serif);font-size:1.15rem;line-height:1.7;margin:0 0 24px;color:var(--muted)}
+.form-wrap{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:40px}
+.form-wrap iframe{display:block;width:100%;height:880px;border:0}
+.form-link{display:inline-block;margin:0 0 40px;padding:12px 22px;border-radius:999px;background:var(--green);color:#fff;font-weight:700;text-decoration:none}
+.tributes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.tribute{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.tribute blockquote{margin:0 0 14px;font-family:var(--serif);font-size:1.08rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.tribute cite{font-style:normal;font-weight:700;color:var(--green);font-size:.95rem}
+.tribute-msg{color:var(--muted);font-style:italic}
+[hidden]{display:none!important}
+
 /* Lightbox */
 dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100vw;height:100vh}
 dialog::backdrop{background:rgba(6,12,24,.92)}
@@ -119,6 +131,7 @@ footer strong{display:block;font-style:normal;color:var(--ink);font-size:1.15rem
     <button class="tab" role="tab" id="tab-historia" aria-controls="historia" aria-selected="true">A história</button>
     <button class="tab" role="tab" id="tab-fotos" aria-controls="fotos" aria-selected="false" tabindex="-1">Fotos</button>
     <button class="tab" role="tab" id="tab-videos" aria-controls="videos" aria-selected="false" tabindex="-1">Vídeos</button>
+    <button class="tab" role="tab" id="tab-homenagens" aria-controls="homenagens" aria-selected="false" tabindex="-1">Homenagens</button>
   </div>
 </div>
 
@@ -170,6 +183,14 @@ footer strong{display:block;font-style:normal;color:var(--ink);font-size:1.15rem
       <figure><video controls preload="none" playsinline poster="videos/poster-1.jpg"><source src="videos/video-1.mp4" type="video/mp4"></video></figure>
     </div>
   </section>
+  <section id="homenagens" role="tabpanel" aria-labelledby="tab-homenagens" hidden>
+    <h2 class="panel-title">Homenagens</h2>
+    <p class="tribute-intro">Deixe aqui uma lembrança, uma palavra de carinho ou uma homenagem ao Davi. Cada mensagem é um presente para a família.</p>
+    <div class="form-wrap" id="form-wrap" hidden><iframe id="form-frame" title="Formulário de homenagem" loading="lazy">Carregando…</iframe></div>
+    <a class="form-link" id="form-link" target="_blank" rel="noopener" hidden>Abrir o formulário em outra página</a>
+    <div class="tributes" id="tributes" aria-live="polite"></div>
+    <p class="tribute-msg" id="tribute-msg" hidden></p>
+  </section>
 </main>
 
 <footer>
@@ -205,7 +226,7 @@ function show(id, focus){
     document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
     if(on && focus) t.focus();
   });
-  if(!['historia','fotos','videos'].includes(id)) return;
+  if(!['historia','fotos','videos','homenagens'].includes(id)) return;
   history.replaceState(null,'','#'+id);
   document.querySelectorAll('video').forEach(v=>v.pause());
 }
@@ -219,7 +240,7 @@ tabs.forEach((t,i)=>{
   });
 });
 const start = location.hash.slice(1);
-if(['fotos','videos'].includes(start)) show(start);
+if(['fotos','videos','homenagens'].includes(start)) show(start);
 
 // Gallery + lightbox
 const g = document.getElementById('gallery'), lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img');
@@ -237,6 +258,59 @@ document.getElementById('lb-prev').onclick=()=>open(cur-1);
 document.getElementById('lb-next').onclick=()=>open(cur+1);
 lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb')) lb.close();});
 lb.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')open(cur-1); if(e.key==='ArrowRight')open(cur+1);});
+
+// ===== HOMENAGENS =====
+// Cole abaixo os dois endereços (veja o LEIA-ME.txt). Enquanto estiverem vazios, a aba "Homenagens" fica escondida.
+const FORM_EMBED_URL = "https://forms.gle/zBe2djFGDn8nmbSu9";  // endereço do formulário (o que está dentro de src="..." no código de incorporação)
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQa-GVjHD9vXI8em6JteppZHwDWPXgu_tIASoyQEpkw7-7lCUWJMNRlIFzQBVAUOQ0y8XaB3kpMsUXL/pub?gid=1334251415&single=true&output=csv"  // endereço da planilha publicada em formato CSV
+
+(function(){
+  const tab = document.getElementById('tab-homenagens');
+  if(!FORM_EMBED_URL && !SHEET_CSV_URL){
+    tab.hidden = true;
+    if(location.hash==='#homenagens') show('historia');
+    return;
+  }
+  if(FORM_EMBED_URL){
+    document.getElementById('form-frame').src = FORM_EMBED_URL;
+    document.getElementById('form-wrap').hidden = false;
+    const a = document.getElementById('form-link');
+    a.href = FORM_EMBED_URL.replace('?embedded=true','').replace('&embedded=true','');
+    a.hidden = false;
+  }
+  if(!SHEET_CSV_URL) return;
+
+  function parseCSV(t){
+    const rows=[]; let row=[], f='', q=false;
+    for(let i=0;i<t.length;i++){
+      const c=t[i];
+      if(q){ if(c==='"'){ if(t[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+      else if(c==='"') q=true;
+      else if(c===','){ row.push(f); f=''; }
+      else if(c==='\n'){ row.push(f); rows.push(row); row=[]; f=''; }
+      else if(c!=='\r') f+=c;
+    }
+    if(f!==''||row.length){ row.push(f); rows.push(row); }
+    return rows;
+  }
+  const box = document.getElementById('tributes'), msg = document.getElementById('tribute-msg');
+  fetch(SHEET_CSV_URL + (SHEET_CSV_URL.includes('?')?'&':'?') + 't=' + Date.now())
+    .then(r=>{ if(!r.ok) throw 0; return r.text(); })
+    .then(text=>{
+      const rows = parseCSV(text).filter(r=>r.some(c=>c.trim()));
+      const head = (rows.shift()||[]).map(h=>h.trim().toLowerCase());
+      const appr = head.findIndex(h=>h.startsWith('aprovad'));   // coluna opcional "Aprovado"
+      const list = rows.filter(r=>(r[1]||'').trim() && (r[3]||'').trim() && (appr<0 || (r[appr]||'').trim().toLowerCase()==='sim')).reverse();
+      if(!list.length){ msg.textContent='Seja a primeira pessoa a deixar uma homenagem.'; msg.hidden=false; return; }
+      list.forEach(r=>{
+        const d=document.createElement('div'); d.className='tribute';
+        const b=document.createElement('blockquote'); b.textContent=r[3].trim();
+        const c=document.createElement('cite'); c.textContent=(r[1].trim()+' '+(r[2]||'').trim()).trim();
+        d.append(b,c); box.appendChild(d);
+      });
+    })
+    .catch(()=>{ msg.textContent='Não foi possível carregar as homenagens agora. Tente novamente mais tarde.'; msg.hidden=false; });
+})();
 </script>
 </body>
 </html>
