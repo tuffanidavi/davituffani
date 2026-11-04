@@ -87,8 +87,8 @@ main{max-width:1040px;margin:0 auto;padding:48px 24px 72px}
 .form-link{display:inline-block;margin:0 0 40px;padding:12px 22px;border-radius:999px;background:var(--green);color:#fff;font-weight:700;text-decoration:none}
 .tributes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 .tribute{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
-.tribute blockquote{margin:0 0 14px;font-family:var(--serif);font-size:1.08rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
-.tribute cite{font-style:normal;font-weight:700;color:var(--green);font-size:.95rem}
+.tribute blockquote{margin:0;font-family:var(--serif);font-size:1.08rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.tribute cite{display:block;margin-bottom:10px;font-style:normal;font-weight:700;color:var(--green);font-size:.95rem}
 .tribute-msg{color:var(--muted);font-style:italic}
 [hidden]{display:none!important}
 
@@ -306,7 +306,7 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQa-GVjHD
         const d=document.createElement('div'); d.className='tribute';
         const b=document.createElement('blockquote'); b.textContent=r[3].trim();
         const c=document.createElement('cite'); c.textContent=(r[1].trim()+' '+(r[2]||'').trim()).trim();
-        d.append(b,c); box.appendChild(d);
+        d.append(c,b); box.appendChild(d);
       });
     })
     .catch(()=>{ msg.textContent='Não foi possível carregar as homenagens agora. Tente novamente mais tarde.'; msg.hidden=false; });
